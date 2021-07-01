@@ -11,6 +11,8 @@ mod tests {
     use super::*;
     #[test]
     fn it_works() {
-        let mock = MockMyTrait::new();
+        let mut mock = MockMyTrait::new();
+        mock.expect_foo().with(predicate::eq(4)).times(1).returning(|x| x+1);
+        assert_eq!(5, mock.foo(4));
     }
 }
